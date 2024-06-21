@@ -47,6 +47,16 @@ class ActionGroupTestCase(unittest.TestCase):
         self.assertIn("chime", groups.keys())
         self.assertEqual(groups["chime"], {"Read"})
 
+    def test_regression_on_past_errors_redshift_DescribeEndpointAuthorization(self):
+        from policyuniverse.action_categories import categories_for_actions
+
+        actions = [
+            "redshift:describeendpointauthorization",
+        ]
+        groups = categories_for_actions(actions)
+        self.assertIn("redshift", groups.keys())
+        self.assertEqual(groups["redshift"], {"List"})
+
     def test_actions_for_category(self):
         from policyuniverse.action_categories import actions_for_category
 
